@@ -103,18 +103,19 @@ function Rebirth() {
 };
 
 // buy worker
+let lastFullCashNum = 0;
 function buyGoon() {
     const cost = calcGoonCost();
     if (coins < cost) { return };
     coins -= cost;
     goons += 1;
+    lastFullCashNum = Math.floor(coins);
     saveData();
     updateLabels();
 };
 
 // run workers every 100ms (they auto click for you)
 const timeID = setInterval(runGoons, 100);
-let lastFullCashNum = 0;
 function runGoons() {
     coins += calcGoonIncome() * 0.1;
 
